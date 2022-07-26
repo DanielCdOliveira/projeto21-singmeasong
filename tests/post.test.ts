@@ -18,6 +18,7 @@ describe("POST /recommendations", () => {
     //Side effects
     const recommendationCreated = await prisma.recommendation.findFirst({ where: { name: recommendation.name } })
     expect(recommendationCreated).not.toBeNull()
+    expect(recommendationCreated.youtubeLink).toEqual(recommendation.youtubeLink)
   })
   it("should not create recommendation with same name", async () => {
     const recommendation =recommendationBody()

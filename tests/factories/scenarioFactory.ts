@@ -10,9 +10,11 @@ export async function createScenarioOneRecommendation(){
     const recommendationCreated = await prisma.recommendation.findFirst({ where: { name: recommendation.name } })
     return recommendationCreated
 }
-export async function createScenarioOneRecommendationScoreMinusFive(){
+export async function createScenarioRecommendationsRandom() {
+    const qty = Math.floor(Math.random() * 100);
+    for(let i = 0; i< qty;i++){
     const recommendation = recommendationBody()
-    await agent.post("/recommendations").send(recommendation)
-    const recommendationCreated = await prisma.recommendation.findFirst({ where: { name: recommendation.name } })
-    return recommendationCreated
+    await prisma.recommendation.create({data:recommendation})
+    }
+    return qty
 }
