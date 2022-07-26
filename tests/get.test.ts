@@ -3,7 +3,7 @@ import supertest from "supertest"
 import { prisma } from "../src/database.js"
 import app from "../src/app.js"
 import { recommendationBody, recommendationBodyWrongLink, recommendationBodyWrongName } from "./factories/recommendationFactory.js";
-import { createScenarioOneRecommendation, createScenarioRecommendationsRandom } from "./factories/scenarioFactory.js";
+import { createScenarioOneRecommendation, createScenarioRecommendationsRandom, createScenarioTwoRecommendationsForRandomTest } from "./factories/scenarioFactory.js";
 
 beforeEach(async () => {
   await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY;`
@@ -22,10 +22,15 @@ describe("GET /recommendations", () => {
     });
   })
   it("get the recommendation by id at /recommendations/:id", async () => {
+    //generating random number of recommendation
     const numberRecommendations = await createScenarioRecommendationsRandom()
+    //generatin an random id
     const randomId = Math.floor(Math.random() * numberRecommendations);
+    // getting the recommendation direct from database
     const recommendationFromDb = await prisma.recommendation.findFirst({where:{id:randomId}})
+    // getting recommendation from route
     const recommendationCreated = await agent.get(`/recommendations/${randomId}`)
+    expect(recommendationCreated.body.id).toEqual(recommendationFromDb.id)
     expect(recommendationCreated.body.youtubeLink).toEqual(recommendationFromDb.youtubeLink)
     expect(recommendationCreated.body.name).toEqual(recommendationFromDb.name)
   })
@@ -33,6 +38,20 @@ describe("GET /recommendations", () => {
     const recommendationCreated = await agent.get(`/recommendations/1`)
     expect(recommendationCreated.status).toEqual(404)
   })
+})
+
+describe("GET /recommendations/random",()=>{
+
+  it("get random link 70%/30%", async () => {
+    const scoreGreaterThanTen = await createScenarioTwoRecommendationsForRandomTest()
+
+    console.log(scoreGreaterThanTen);
+    expect(scoreGreaterThanTen).toEqual(7)
+  })
+
+
+
+
 
 
 

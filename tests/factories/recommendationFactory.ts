@@ -22,3 +22,17 @@ export function recommendationBodyWrongLink() {
         youtubeLink:invalidLink
     }
 }
+export function recommendationWithScore11() {
+    return{
+        name:faker.name.findName(),
+        youtubeLink:invalidLink,
+        score:11
+    }
+}
+export function recommendationWithScore5() {
+    return{
+        name:faker.name.findName(),
+        youtubeLink:invalidLink,
+        score:5
+    }
+}
