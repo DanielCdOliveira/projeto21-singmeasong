@@ -1,5 +1,4 @@
 import {prisma} from "../../src/database.js"
-import { faker } from "@faker-js/faker"
 
 import {agent} from "../post.test.js"
 import { recommendationBody, recommendationWithScore11, recommendationWithScore5, recommendationWithScoreByParams } from "./recommendationFactory.js"

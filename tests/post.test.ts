@@ -1,7 +1,7 @@
-import { faker } from "@faker-js/faker"
 import supertest from "supertest"
 import { prisma } from "../src/database.js"
 import app from "../src/app.js"
+
 import { recommendationBody, recommendationBodyWrongLink, recommendationBodyWrongName } from "./factories/recommendationFactory.js";
 import { createScenarioOneRecommendation } from "./factories/scenarioFactory.js";
 
