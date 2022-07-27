@@ -46,9 +46,11 @@ describe("GET /recommendations/random",()=>{
     const scoreGreaterThanTen = await createScenarioTwoRecommendationsForRandomTest()
     expect(scoreGreaterThanTen).toEqual(7)
   })
-  it("get random only score>10 or <10", async () => {
+  it("get random only score>10", async () => {
     const scoreGreaterThanTen = await createScenarioTwoRecommendationsScoreGreaterThanTen()
     expect(scoreGreaterThanTen).toEqual(10)
+  })
+  it("get random only score<10", async () => {
     const scoreLessThanTen = await createScenarioTwoRecommendationsScoreLessThanTen()
     expect(scoreLessThanTen).toEqual(10)
   })
@@ -68,7 +70,7 @@ describe("GET /recommendations/top/:amount",()=>{
    expect(result.body.length).toEqual(10)
   // verifying if is oprdened by score descending
    result.body.forEach((item: Recommendation , index: number)=>{
-    expect(item.score).toEqual(20 - (index+1))
+    expect(item.score).toEqual(20 - index)
    })
   })
   

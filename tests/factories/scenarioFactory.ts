@@ -51,7 +51,7 @@ export async function createScenarioTwoRecommendationsScoreLessThanTen() {
     let count = 0
     for(let i = 0; i<10; i++){
         const {body} = await agent.get(`/recommendations/random`)
-        if(body.score >10) count++
+        if(body.score <10) count++
     }
     return count
 }

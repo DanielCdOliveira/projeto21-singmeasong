@@ -21,7 +21,7 @@ describe("POST /recommendations", () => {
     expect(recommendationCreated.youtubeLink).toEqual(recommendation.youtubeLink)
   })
   it("should not create recommendation with same name", async () => {
-    const recommendation =recommendationBody()
+    const recommendation = recommendationBody()
     await agent.post("/recommendations").send(recommendation)
     const recommendationCreated = await agent.post("/recommendations").send(recommendation)
     expect(recommendationCreated.status).toEqual(409)
@@ -40,19 +40,19 @@ describe("POST /recommendations", () => {
 describe("POST /recommendations/:id/upvote", () => {
 
   it("should upvote recommendation", async () => {
-    const {id , score} = await createScenarioOneRecommendation()
+    const { id, score } = await createScenarioOneRecommendation()
     await agent.post(`/recommendations/${id}/upvote`)
     const recommendationCreated = await prisma.recommendation.findFirst({ where: { id } })
     expect(recommendationCreated.score).toEqual(score + 1)
   })
   it("should downvote recommendation", async () => {
-    const {id , score} = await createScenarioOneRecommendation()
+    const { id, score } = await createScenarioOneRecommendation()
     await agent.post(`/recommendations/${id}/downvote`)
     const recommendationCreated = await prisma.recommendation.findFirst({ where: { id } })
     expect(recommendationCreated.score).toEqual(score - 1)
   })
   it("should delete recommendation with score < -5", async () => {
-    const {id} = await createScenarioOneRecommendation()
+    const { id } = await createScenarioOneRecommendation()
     await agent.post(`/recommendations/${id}/downvote`)
     await agent.post(`/recommendations/${id}/downvote`)
     await agent.post(`/recommendations/${id}/downvote`)
