@@ -25,14 +25,21 @@ export function recommendationBodyWrongLink() {
 export function recommendationWithScore11() {
     return{
         name:faker.name.findName(),
-        youtubeLink:invalidLink,
+        youtubeLink,
         score:11
     }
 }
 export function recommendationWithScore5() {
     return{
         name:faker.name.findName(),
-        youtubeLink:invalidLink,
+        youtubeLink,
         score:5
+    }
+}
+export function recommendationWithScoreByParams(score: number) {
+    return{
+        name:faker.name.findName(),
+        youtubeLink,
+        score
     }
 }
