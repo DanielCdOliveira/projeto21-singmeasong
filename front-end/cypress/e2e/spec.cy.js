@@ -1,9 +1,9 @@
 ///  <reference types="cypress"/>
-import {faker} from "@faker-js/faker"
+import { faker } from "@faker-js/faker";
 const URL_API = "http://localhost:5000/recommendations/";
 const URL_APP = "http://localhost:3000/";
 
-beforeEach( () => {
+beforeEach(() => {
   cy.resetDatabase();
 });
 describe("create recommendations", () => {
@@ -23,36 +23,57 @@ describe("create recommendations", () => {
     const recommendation = {
       name: faker.name.findName(),
       youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
-      };
-    cy.request("POST", "http://localhost:5000/recommendations/",recommendation).as("createRecommendation");
-    cy.visit(URL_APP)
-    cy.get("#name").type(recommendation.name)
-    cy.get("#link").type(recommendation.youtubeLink)
-    cy.get("button").click()
+    };
+    cy.request("POST", URL_API, recommendation).as("createRecommendation");
+    cy.visit(URL_APP);
+    cy.get("#name").type(recommendation.name);
+    cy.get("#link").type(recommendation.youtubeLink);
+    cy.get("button").click();
     cy.on("window:alert", (str) => {
-        expect(str).to.equal(`Error creating recommendation!`)
-    })
-})
+      expect(str).to.equal(`Error creating recommendation!`);
+    });
+  });
 });
 describe("redirect page tests", () => {
   it("should go to /top", () => {
     cy.visit(URL_APP);
-    cy.get("#top").click()
+    cy.get("#top").click();
     cy.url().should("equal", `${URL_APP}top`);
   });
   it("should go to /random", () => {
     cy.visit(URL_APP);
-    cy.get("#random").click()
+    cy.get("#random").click();
     cy.url().should("equal", `${URL_APP}random`);
   });
   it("should go to homepage", () => {
     cy.visit(URL_APP);
-    cy.get("#home").click()
+    cy.get("#home").click();
     cy.url().should("equal", `${URL_APP}`);
   });
 });
-describe("score tests",()=>{
-it("should increase score",()=>{
-  
-})
-})
+describe("score tests", () => {
+  it("should increase score", () => {
+    cy.createRecommendation();
+    cy.get("#upvote").click();
+    cy.contains("1").should("be.visible");
+    cy.get("#upvote").click();
+    cy.contains("2").should("be.visible");
+  });
+  it("should decrease score", () => {
+    cy.createRecommendation();
+    cy.get("#downvote").click();
+    cy.contains("-1").should("be.visible");
+    cy.get("#downvote").click();
+    cy.contains("-2").should("be.visible");
+  });
+  it("should decrease score until delete", () => {
+    cy.createRecommendation();
+    cy.get("#downvote").click();
+    cy.get("#downvote").click();
+    cy.get("#downvote").click();
+    cy.get("#downvote").click();
+    cy.get("#downvote").click();
+    cy.get("#downvote").click();
+    cy.contains("No recommendations yet! Create your own :)").should("be.visible");
+  });
+});
