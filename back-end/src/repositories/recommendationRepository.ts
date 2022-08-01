@@ -68,7 +68,9 @@ async function remove(id: number) {
     where: { id },
   });
 }
-
+async function deleteAllData() {
+ return await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY;`
+}
 export const recommendationRepository = {
   create,
   findAll,
@@ -77,4 +79,5 @@ export const recommendationRepository = {
   updateScore,
   getAmountByScore,
   remove,
+  deleteAllData
 };

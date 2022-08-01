@@ -4,9 +4,10 @@ import { prisma } from "../src/database.js"
 import { Recommendation } from "@prisma/client";
 import app from "../src/app.js"
 import { createScenarioRecommendationsRandom, createScenarioTwentyRecommendation, createScenarioTwoRecommendationsForRandomTest, createScenarioTwoRecommendationsScoreGreaterThanTen, createScenarioTwoRecommendationsScoreLessThanTen } from "./factories/scenarioFactory.js";
+import deleteAllData from "./factories/deleteAllData.js";
 
 beforeEach(async () => {
-  await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY;`
+  await deleteAllData()
 });
 export const agent = supertest(app);
 describe("GET /recommendations", () => {

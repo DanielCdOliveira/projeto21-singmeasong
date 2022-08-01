@@ -4,9 +4,10 @@ import app from "../src/app.js"
 
 import { recommendationBody, recommendationBodyWrongLink, recommendationBodyWrongName } from "./factories/recommendationFactory.js";
 import { createScenarioOneRecommendation } from "./factories/scenarioFactory.js";
+import deleteAllData from "./factories/deleteAllData.js"
 
 beforeEach(async () => {
-  await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY;`
+ await deleteAllData()
 });
 export const agent = supertest(app);
 
