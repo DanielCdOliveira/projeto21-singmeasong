@@ -1,11 +1,15 @@
 import { jest } from "@jest/globals";
 import {faker} from "@faker-js/faker"
+import { prisma } from "../src/database.js"
 import { recommendationService } from "../src/services/recommendationsService.js";
 import { recommendationRepository } from "../src/repositories/recommendationRepository.js";
 
 import dotenv from "dotenv"
 import { recommendationBody } from "./factories/recommendationFactory.js";
 dotenv.config()
+beforeEach(async ()=> {
+  await prisma.$executeRaw`TRUNCATE TABLE recommendations`
+})
 
 describe("create recommendations", () => {
   it("should create recommendation", async () => {
