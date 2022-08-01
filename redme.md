@@ -154,4 +154,4 @@ npm test
 
 ## Thunder client
 
-- Para testes manuais é possível importar o arquivo **thunder-collection_repoprovas.json**
+- Para testes manuais é possível importar o arquivo **thunder-collection_singMeASong.json**
