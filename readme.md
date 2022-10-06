@@ -1,157 +1,155 @@
-# <p align = "center"> Projeto Sing me a song </p>
+
+<div align="center"><img style = "width:100%;"src="https://i.imgur.com/j0zXkzh.png"></img></div>
+<hr>
+<h2 align=center>RepoProvas</h2>
+<h3 align=center>Web development Project</h3>
+<hr>
+<h4 align=center>Have you ever asked anyone for music recommendations? It's time to turn this into code. This week, you will build the Sing me a Song network. Or rather, the tests of this network!</h4>
+<h4 align=center>Sing me a song is an application for anonymous song recommendation. The more people like a recommendation, the more likely it is to be recommended to others 🙂.</h4>
+
+<hr>
 
 <p align="center">
-   <img width="30%" src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f399-fe0f.svg"/>
-</p>
-
-<p align = "center">
    <img src="https://img.shields.io/badge/author-Daniel Oliveira-4dae71?style=flat-square" />
-   <img src="https://img.shields.io/github/languages/count/DanielCdOliveira/projeto20-repoprovas?color=4dae71&style=flat-square" />
+   <img src="https://img.shields.io/github/languages/count/DanielCdOliveira/projeto21-singmeasong?color=4dae71&style=flat-square" />
 </p>
 
 
-##  :clipboard: Descrição
-
-- Já pediu para alguém alguma recomendação de música? Chegou a hora de transformar isso em código. Nessa semana, você vai construir a rede Sing me a Song. Ou melhor, os testes desta rede!
-- Sing me a song é uma aplicação para recomendação anônima de músicas. Quanto mais as pessoas curtirem uma recomendação, maior a chance dela ser recomendada para outras pessoas 🙂.
-
-***
-
-## :computer:	 Tecnologias e Conceitos
+## :computer: Technologies and Concepts
 
 - REST APIs
-- JWTs 
+- JWTs
 - Node.js
 - TypeScript
-- Postgresql
-- Prisma
+- postgresql
+- Prism
 - Jest
 - Heroku
 
 ***
 
-## :rocket: Rotas
+## :rocket: Routes
 
 ```yml
 POST /recommendations
-    - Rota para cadastrar uma nova recomendação
+    - Route to register a new recommendation
     - headers: {}
     - body:{
-        "name":"<nome_da_musica>",
-        "youtubeLink":"<link_do_youtube>"
+        "name":"<songname>",
+        "youtubeLink":"<youtube_link>"
 }
 ```
 ```yml
 POST /recommendations/:id/upvote
-    - Rota para adicionar 1 ponto na recomendação
+    - Route to add 1 point in the recommendation
     - headers: {}
     - body:{}
 ```
 ```yml
 POST /recommendations/:id/downvote
-    - Rota para remover 1 ponto na recomendação
+    - Route to remove 1 point in recommendation
     - headers: {}
     - body:{}
 ```
     
-```yml 
+```yml
 get /recommendations
-    - Rota para pegar as últimas 10 recomendações
+    - Route to get the last 10 recommendations
     - headers: {}
     - body: {}
 ```
-```yml 
+```yml
 get /recommendations/:id
-    - Rota para pegar as últimas recomendações pelo id
+    - Route to get the latest recommendations by id
     - headers: {}
     - body: {}
 ```
-```yml 
+```yml
 get /recommendations/random
-    - Rota para pegar recomendações aleatórias
+    - Route to pick up random recommendations
     - headers: {}
     - body: {}
 ```
-```yml 
+```yml
 get /recommendations/top/:amount
-    - Rota para pegar lista as músicas com maior número de pontos e sua pontuação 
+    - Route to pick up lists the songs with the most points and their score
     - headers: {}
     - body: {}
 ```
 
 ***
 
-## 🏁 Rodando a aplicação
+## 🏁 Running the application
 
-Certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
+Make sure you have the latest stable version of [Node.js](https://nodejs.org/en/download/) and [npm](https://www.npmjs.com/) running locally.
 
-Primeiro, faça o clone desse repositório na sua maquina:
+First, clone this repository on your machine:
 
 ```
 git clone https://github.com/DanielCdOliveira/projeto21-singmeasong
 ```
 
-## Back-end
+## Backend
 
-Dentro da pasta back-end, rode o seguinte comando para instalar as dependencias.
+Inside the backend folder, run the following command to install the dependencies.
 
 ```
 npm install
 ```
 
-Finalizado o processo, é só inicializar o servidor:
+Once the process is finished, just start the server:
 
-> Para subir a aplicação em ambiente de desenvolvimento:
+> To upload the application to the development environment:
 ```
 npm run dev
 ```
 
-> Para subir a aplicação de testes de integração:
-- é necessario criar um arquivo **.env.test** para rodar esse comando
+> To upload the integration testing application:
+- it is necessary to create a **.env.test** file to run this command
 ```
 npm run test
 ```
-> Para subir a aplicação de testes unitários:
-- é necessario criar um arquivo **.env.test** para rodar esse comando
+> To upload the unit tests application:
+- it is necessary to create a **.env.test** file to run this command
 ```
 npm run test:unit
 ```
-> Para subir a aplicação para testes com cypress(front-end):
-- é necessario criar um arquivo **.env.test** para rodar esse comando
+> To upload the application for testing with cypress(front-end):
+- it is necessary to create a **.env.test** file to run this command
 ```
 npm run dev:test
 ```
 
-> Para rodar a build do projeto com typescript:
+> To run the project build with typescript:
 
 ```
 npm run build
 ```
-> Para subir a aplicação após o build:
+> To upload the application after the build:
 ```
 npm run start
 ```
-## Front-end
+## Front end
 
-Dentro da pasta back-end, rode o seguinte comando para instalar as dependencias.
+Inside the backend folder, run the following command to install the dependencies.
 
 ```
 npm install
 ```
 
-Finalizado o processo, é só inicializar o servidor:
+Once the process is finished, just start the server:
 
-> Para subir a aplicação em ambiente de desenvolvimento:
+> To upload the application to the development environment:
 ```
 npm start
 ```
 
-> Para subir a aplicação de testes com cypress:
-- é necessario abrir a aplicação do back-end com o comando **npm run dev:test**
+> To upload the test application with cypress:
+- it is necessary to open the backend application with the command **npm run dev:test**
 ```
 npm test
 ```
 
 ## Thunder client
 
-- Para testes manuais é possível importar o arquivo **thunder-collection_singMeASong.json**
+- For manual testing it is possible to import the file **thunder-collection_singMeASong.json**
